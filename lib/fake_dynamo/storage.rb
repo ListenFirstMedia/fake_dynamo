@@ -27,7 +27,7 @@ module FakeDynamo
     def init_db(path)
       @db_path = path
 
-      return if File.exists?(db_path) && File.writable?(db_path)
+      return if File.exist?(db_path) && File.writable?(db_path)
 
       FileUtils.mkdir_p(File.dirname(db_path))
       FileUtils.touch(db_path)
@@ -38,7 +38,7 @@ module FakeDynamo
     end
 
     def delete_db
-      return unless File.exists? db_path
+      return unless File.exist? db_path
       FileUtils.rm(db_path)
     end
 
@@ -92,7 +92,7 @@ module FakeDynamo
     end
 
     def compact_if_necessary
-      return unless File.exists? db_path
+      return unless File.exist? db_path
       if File.stat(db_path).size > compact_threshold
         compact!
       end
